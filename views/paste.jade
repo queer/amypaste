@@ -1,0 +1,19 @@
+extends layout
+
+block head
+    link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/default.min.css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js")
+    script.
+        //hljs.initHighlightingOnLoad();
+        $(document).ready(function () {
+            $('pre.pasteblock').each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
+        });
+
+block content
+    a(href="/")
+        h1= title
+    p paste id:
+        span.paste #{id}
+    pre.paste.pasteblock #{content}

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    script.
+        function doPost() {
+            $.post('/dopaste', {text: $('#paste-text').val()}, function (data) {
+                console.log("Sent: " + JSON.stringify({text: $('#paste-text').val()}));
+                console.log('Got response: ' + data);
+                setTimeout(function () {
+                    try {
+                        var res = JSON.parse(data);
+                        alert(res.error);
+                    } catch (e) {
+                        window.location.href = "/p/" + data;
+                    }
+                }, 1000);
+            });
+        }
+
+    h1= title
+    p won't be garbage soon(TM)
+    br
+    br
+    textarea(rows=24, cols=80, id='paste-text')
+    br
+    br
+    button(onclick="doPost();") paste!
